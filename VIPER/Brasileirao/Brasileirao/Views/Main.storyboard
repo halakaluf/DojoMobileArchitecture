@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CYd-fd-0bf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Brasileirao Navigation Controller-->
+        <scene sceneID="XBd-fy-HDe">
+            <objects>
+                <navigationController storyboardIdentifier="BrasileiraoNavigationController" id="CYd-fd-0bf" customClass="BrasileiraoNavigationController" customModule="Brasileirao" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QPT-VR-6Fx">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.23137254900000001" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.23137254900000001" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gzj-Wk-jhd" kind="relationship" relationship="rootViewController" id="zSk-dU-d9y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5e-dk-wTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-448" y="128"/>
+        </scene>
+        <!--Brasileirão-->
+        <scene sceneID="XrX-RO-L8C">
+            <objects>
+                <viewController storyboardIdentifier="MatchListViewController" id="gzj-Wk-jhd" customClass="MatchListViewController" customModule="Brasileirao" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hXL-RC-IIf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oyb-fA-z3d">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gzj-Wk-jhd" id="Cmi-22-2D9"/>
+                                    <outlet property="delegate" destination="gzj-Wk-jhd" id="f1n-L5-Sfz"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Oyb-fA-z3d" firstAttribute="trailing" secondItem="8KR-l5-TKU" secondAttribute="trailing" id="Ace-iD-5Bw"/>
+                            <constraint firstItem="Oyb-fA-z3d" firstAttribute="top" secondItem="8KR-l5-TKU" secondAttribute="top" id="ECS-WO-4ix"/>
+                            <constraint firstItem="Oyb-fA-z3d" firstAttribute="bottom" secondItem="8KR-l5-TKU" secondAttribute="bottom" id="ZjT-P0-wDW"/>
+                            <constraint firstItem="Oyb-fA-z3d" firstAttribute="leading" secondItem="8KR-l5-TKU" secondAttribute="leading" id="lTG-md-D4K"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8KR-l5-TKU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Brasileirão" id="CER-0r-SSL"/>
+                    <connections>
+                        <outlet property="tableView" destination="Oyb-fA-z3d" id="dnf-xN-Mc1"/>
+                        <segue destination="FX1-PV-z7f" kind="show" identifier="MatchDetails" id="DWs-dy-cFF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="baK-XF-F2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="127"/>
+        </scene>
+        <!--Match Details View Controller-->
+        <scene sceneID="VDU-sb-QT2">
+            <objects>
+                <viewController storyboardIdentifier="MatchDetailsViewController" id="FX1-PV-z7f" customClass="MatchDetailsViewController" customModule="Brasileirao" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CHx-ah-1tJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bP7-5r-qMY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="FX1-PV-z7f" id="9Ah-eU-clQ"/>
+                                    <outlet property="delegate" destination="FX1-PV-z7f" id="Zdv-fB-S4z"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bP7-5r-qMY" firstAttribute="leading" secondItem="ch6-rB-3y7" secondAttribute="leading" id="H3B-WC-sMQ"/>
+                            <constraint firstItem="bP7-5r-qMY" firstAttribute="top" secondItem="ch6-rB-3y7" secondAttribute="top" id="aDZ-1H-ruX"/>
+                            <constraint firstItem="bP7-5r-qMY" firstAttribute="bottom" secondItem="ch6-rB-3y7" secondAttribute="bottom" id="et5-TR-BVj"/>
+                            <constraint firstItem="bP7-5r-qMY" firstAttribute="trailing" secondItem="ch6-rB-3y7" secondAttribute="trailing" id="hxW-Lt-ks0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ch6-rB-3y7"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="bP7-5r-qMY" id="cuV-jM-cfj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5e-nC-Ldn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="126.38680659670166"/>
+        </scene>
+    </scenes>
+</document>
