@@ -35,11 +35,10 @@ protocol MatchListPresenterInterface: PresenterInterface {
 
 protocol MatchListInteractorInterface: InteractorInterface {
     func fetchMatches(round: Int, completionHandler: @escaping (Any) -> Void)
-    func saveMatches(matches: [Match]) /////////apagar
-    func loadMatches() -> [Match] /////////apagar
+    func saveMatches(matches: [Match])
+    func loadMatches() -> [Match]
     
 }
-
 
 protocol MatchViewItemInterface {
     
