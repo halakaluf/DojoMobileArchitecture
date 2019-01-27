@@ -9,15 +9,15 @@
 import Foundation
 
 struct Bid: Decodable {
-    let time: String
+    let time:   String
     let period: String
-    let title: String
-    let text: String
+    let title:  String
+    let text:   String
     
     enum CodingKeys: String, CodingKey {
-        case time = "tempo"
+        case time   = "tempo"
         case period = "periodo"
-        case title = "titulo"
-        case text = "text"
+        case title  = "titulo"
+        case text   = "text"
     }
 }

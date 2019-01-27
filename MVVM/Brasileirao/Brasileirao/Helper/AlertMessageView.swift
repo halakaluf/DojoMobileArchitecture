@@ -21,7 +21,6 @@ class AlertMessageView: UIView {
             self.hideAlertMessageAnim()
         }
         
-        
     }
     
     @objc func hideAlertMessageAnim() -> (Void) {

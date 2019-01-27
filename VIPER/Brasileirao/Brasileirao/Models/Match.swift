@@ -69,7 +69,6 @@ class Transmission: Object, Decodable {
     @objc dynamic var url: String
 }
 
-
 extension Match: MatchViewItemInterface {
     
     var scoreBoard: NSAttributedString? {

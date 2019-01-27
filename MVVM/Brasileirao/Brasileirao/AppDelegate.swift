@@ -17,8 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().prefersLargeTitles = false
         
-        
-//        let launchScreenStoryboard:SplashViewController = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateViewController(withIdentifier: "SplashViewController") as! SplashViewController
         self.window?.rootViewController = ViewControllerFactory.splashViewController()
         
         return true

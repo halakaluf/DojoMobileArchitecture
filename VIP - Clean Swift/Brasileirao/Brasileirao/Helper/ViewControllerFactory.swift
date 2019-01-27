@@ -20,10 +20,5 @@ class ViewControllerFactory {
         let matchesListViewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
         return matchesListViewController
     }
-
-//    public static func matchDetailViewController () -> (MatchDetailViewController) {
-//        let matchDetailViewController:MatchDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchDetailViewController") as! MatchDetailViewController
-//        return matchDetailViewController
-//    }
    
 }

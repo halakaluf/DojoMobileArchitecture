@@ -31,7 +31,6 @@ class MatchListInteractor: MatchListDataStore {
 
     var matches = [Match]()
     
-    // MARK: Do something
     
     private func fetchMatches(round: Int) {
         worker.fetchMatches(round: round, completionHandler: { [weak self] result in

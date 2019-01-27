@@ -35,7 +35,6 @@ class AlertMessageView: UIView {
             self.isHidden = true
         })
     }
-    
 
     func showAlertMessage(bgColor: UIColor, msg: String) -> (Void) {
         if self.timerHideAlert != nil {

@@ -22,12 +22,12 @@ class Match: Object, Decodable  {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case date = "data_realizacao"
-        case stadium = "sede"
+        case date           = "data_realizacao"
+        case stadium        = "sede"
         case guestClubScore = "placar_oficial_visitante"
-        case homeClubScore = "placar_oficial_mandante"
-        case teams = "equipes"
-        case transmission = "transmissao"
+        case homeClubScore  = "placar_oficial_mandante"
+        case teams          = "equipes"
+        case transmission   = "transmissao"
     }
 
 }
@@ -46,8 +46,8 @@ class Teams: Object, Decodable {
     @objc dynamic var guest: Club?
     
     enum CodingKeys: String, CodingKey {
-        case home = "mandante"
-        case guest = "visitante"
+        case home   = "mandante"
+        case guest  = "visitante"
     }
 }
 
@@ -59,9 +59,9 @@ class Club: Object, Decodable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case popularName = "nome_popular"
-        case acronyms = "sigla"
-        case clubImageUrl = "escudo"
+        case popularName    = "nome_popular"
+        case acronyms       = "sigla"
+        case clubImageUrl   = "escudo"
     }
 }
 
