@@ -54,9 +54,9 @@ https://lalmartinez.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol
 
 ### Bibliotecas Utilizadas
 
-  - Alamofire: Para requsiçoes HTTP 
+  - Alamofire: Para requsições HTTP 
     - https://github.com/Alamofire/Alamofire
-  - Realm: Para armazenamento de dados Local
+  - Realm: Para armazenamento de dados Locais
     - https://realm.io/
   - SDWebImage: Para download de imagens com um bom gerenciamento de cache
     - https://github.com/SDWebImage/SDWebImage
