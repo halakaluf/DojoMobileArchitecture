@@ -56,7 +56,7 @@ https://lalmartinez.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol
 
   - Alamofire: Para requsições HTTP 
     - https://github.com/Alamofire/Alamofire
-  - Realm: Para armazenamento de dados Locais
+  - Realm: Para armazenamento de dados locais
     - https://realm.io/
   - SDWebImage: Para download de imagens com um bom gerenciamento de cache
     - https://github.com/SDWebImage/SDWebImage
