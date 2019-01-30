@@ -43,20 +43,20 @@ O app descrito acima foi criado nas arquiteturas MVVM, VIP(clean Swift) e VIPER
 
 ### API
 
-Para Lista de Jogos foi utilizado a propria api do GE:
+Para Lista de Jogos foi utilizado a propria api do Globo Esporte:
 ```
 https://api.globoesporte.globo.com/tabela/d1a37fa4-e948-43a6-ba53-ab24ab3a45b1/fase/fase-unica-seriea-2018/rodada/2/jogos/
 ```
-Para a listagem de momentos importantes o "Lance a Lance" foi feito um micro serviço em node que recebe a url encontrada na api de jogos na propriedade transmissao.url e Crawleia os dados e retorna um Json para o app.
+Para a listagem de momentos importantes para o "Lance a Lance" foi feito um micro serviço em node que recebe a url encontrada na api de jogos na propriedade `transmissao.url` e "crawleia" os dados e retorna um Json para o app.
 ```
 https://lalmartinez.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol/brasileirao-serie-a/jogo/16-09-2018/corinthians-sport.ghtml
 ```
 
 ### Bibliotecas Utilizadas
 
-  - Alamofire: Para requsiçoes HTTP 
+  - Alamofire: Para requsições HTTP 
     - https://github.com/Alamofire/Alamofire
-  - Realm: Para armazenamento de dados Local
+  - Realm: Para armazenamento de dados locais
     - https://realm.io/
   - SDWebImage: Para download de imagens com um bom gerenciamento de cache
     - https://github.com/SDWebImage/SDWebImage
