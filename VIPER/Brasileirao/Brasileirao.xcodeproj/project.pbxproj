@@ -53,6 +53,8 @@
 		92CF8F4521FCA289006BE279 /* MatchDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF8F4021FCA289006BE279 /* MatchDetailsInteractor.swift */; };
 		92CF8F4621FCA289006BE279 /* MatchDetailsWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF8F4121FCA289006BE279 /* MatchDetailsWireframe.swift */; };
 		92CF8F4921FCEC3C006BE279 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF8F4821FCEC3C006BE279 /* Theme.swift */; };
+		92CF8F4D21FFCAB2006BE279 /* RealmServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF8F4B21FFCAB2006BE279 /* RealmServiceTests.swift */; };
+		92CF8F4E21FFCAB2006BE279 /* APIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF8F4C21FFCAB2006BE279 /* APIServiceTests.swift */; };
 		DC44EDE41ED2A72612D6415B /* Pods_Brasileirao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1D9BB458BC45F298E3421ED /* Pods_Brasileirao.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +119,8 @@
 		92CF8F4021FCA289006BE279 /* MatchDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsInteractor.swift; sourceTree = "<group>"; };
 		92CF8F4121FCA289006BE279 /* MatchDetailsWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsWireframe.swift; sourceTree = "<group>"; };
 		92CF8F4821FCEC3C006BE279 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		92CF8F4B21FFCAB2006BE279 /* RealmServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmServiceTests.swift; path = "../../../../VIP - Clean Swift/Brasileirao/BrasileiraoTests/ServiceTests/RealmServiceTests.swift"; sourceTree = "<group>"; };
+		92CF8F4C21FFCAB2006BE279 /* APIServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIServiceTests.swift; path = "../../../../VIP - Clean Swift/Brasileirao/BrasileiraoTests/ServiceTests/APIServiceTests.swift"; sourceTree = "<group>"; };
 		B711B56942C797F2E47342B4 /* Pods-Brasileirao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brasileirao.debug.xcconfig"; path = "Target Support Files/Pods-Brasileirao/Pods-Brasileirao.debug.xcconfig"; sourceTree = "<group>"; };
 		D1D9BB458BC45F298E3421ED /* Pods_Brasileirao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brasileirao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB36E26A4A41A353448555A5 /* Pods-Brasileirao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brasileirao.release.xcconfig"; path = "Target Support Files/Pods-Brasileirao/Pods-Brasileirao.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,7 +209,7 @@
 				924ADE3421F7ECD000F102C1 /* Service */,
 				924ADE2121F7EC7600F102C1 /* Helper */,
 				924ADE2621F7EC8900F102C1 /* Extensions */,
-				924ADE2F21F7ECB300F102C1 /* Models */,
+				924ADE2F21F7ECB300F102C1 /* Entities */,
 				924ADE4321F7EED500F102C1 /* Views */,
 				92CF8F2621F7F00D006BE279 /* Modules */,
 				924ADE3921F7EE6800F102C1 /* Supporting Files */,
@@ -219,6 +223,7 @@
 		924ADE1521F7EBB800F102C1 /* BrasileiraoTests */ = {
 			isa = PBXGroup;
 			children = (
+				92CF8F4A21FFCA9F006BE279 /* ServiceTests */,
 				248B30F421F9DCC40014BD97 /* MatchList */,
 				924ADE1821F7EBB800F102C1 /* Info.plist */,
 			);
@@ -246,13 +251,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		924ADE2F21F7ECB300F102C1 /* Models */ = {
+		924ADE2F21F7ECB300F102C1 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				924ADE3021F7ECC100F102C1 /* Match.swift */,
 				924ADE3121F7ECC100F102C1 /* Bid.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		924ADE3421F7ECD000F102C1 /* Service */ = {
@@ -350,6 +355,15 @@
 				92CF8F4821FCEC3C006BE279 /* Theme.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		92CF8F4A21FFCA9F006BE279 /* ServiceTests */ = {
+			isa = PBXGroup;
+			children = (
+				92CF8F4C21FFCAB2006BE279 /* APIServiceTests.swift */,
+				92CF8F4B21FFCAB2006BE279 /* RealmServiceTests.swift */,
+			);
+			path = ServiceTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -557,7 +571,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CF8F4E21FFCAB2006BE279 /* APIServiceTests.swift in Sources */,
 				248B30F621F9DD3E0014BD97 /* MatchListInteractorTests.swift in Sources */,
+				92CF8F4D21FFCAB2006BE279 /* RealmServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
