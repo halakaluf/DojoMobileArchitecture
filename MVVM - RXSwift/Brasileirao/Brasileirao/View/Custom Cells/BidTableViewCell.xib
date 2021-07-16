@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
+        </array>
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans-Regular</string>
+        </array>
+        <array key="Proxima-Nova-Bold.otf">
+            <string>ProximaNova-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BidTableViewCell" rowHeight="100" id="KGk-i7-Jjw" customClass="BidTableViewCell" customModule="Brasileirao" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title Cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lS0-fi-Xc1">
+                        <rect key="frame" x="98" y="0.0" width="217" height="18.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18.5" id="70U-b8-Obg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="19"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="47'" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMf-Hw-VRq">
+                        <rect key="frame" x="6" y="0.0" width="55" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="xEF-iG-OFT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="41"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTERVALO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aV-e6-h3k">
+                        <rect key="frame" x="6" y="37" width="64.5" height="12"/>
+                        <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGd-CX-cii" userLabel="CircleView">
+                        <rect key="frame" x="85" y="0.0" width="10" height="10"/>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="8aD-JP-8jW"/>
+                            <constraint firstAttribute="width" constant="10" id="tFt-5F-QeT"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rZq-lr-vLV" userLabel="VerticalLineView">
+                        <rect key="frame" x="89" y="11" width="1" height="88.5"/>
+                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="88" id="48u-0N-7Fj"/>
+                            <constraint firstAttribute="width" constant="1" id="9SY-28-gny"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Com o empate, Corinthians fica em nono, com 31 pontos, a 11 do  " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuQ-MI-vet">
+                        <rect key="frame" x="98" y="15.5" width="217" height="84"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FuQ-MI-vet" firstAttribute="top" secondItem="lS0-fi-Xc1" secondAttribute="bottom" constant="-3" id="38i-uO-WVq"/>
+                    <constraint firstAttribute="bottom" secondItem="rZq-lr-vLV" secondAttribute="bottom" id="5J4-RW-zug"/>
+                    <constraint firstItem="8aV-e6-h3k" firstAttribute="top" secondItem="zMf-Hw-VRq" secondAttribute="bottom" id="BRF-hS-7ya"/>
+                    <constraint firstItem="lS0-fi-Xc1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FWY-hj-E7j"/>
+                    <constraint firstItem="zMf-Hw-VRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="GHJ-zZ-iPP"/>
+                    <constraint firstItem="FuQ-MI-vet" firstAttribute="leading" secondItem="rZq-lr-vLV" secondAttribute="trailing" constant="8" id="HnP-oD-kvx"/>
+                    <constraint firstAttribute="bottom" secondItem="FuQ-MI-vet" secondAttribute="bottom" id="KYu-Vc-Fqr"/>
+                    <constraint firstAttribute="trailing" secondItem="FuQ-MI-vet" secondAttribute="trailing" constant="5" id="QP6-O4-52z"/>
+                    <constraint firstItem="rZq-lr-vLV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="bmi-Lj-rLK"/>
+                    <constraint firstItem="8aV-e6-h3k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="eIx-jQ-DSZ"/>
+                    <constraint firstItem="lS0-fi-Xc1" firstAttribute="leading" secondItem="dGd-CX-cii" secondAttribute="trailing" constant="3" id="fGX-Ny-ybp"/>
+                    <constraint firstItem="zMf-Hw-VRq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="gsh-Fw-LGm"/>
+                    <constraint firstItem="dGd-CX-cii" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="85" id="isg-I2-IR3"/>
+                    <constraint firstItem="rZq-lr-vLV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="89" id="qd5-Ls-7GL"/>
+                    <constraint firstItem="dGd-CX-cii" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rvn-b1-SMt"/>
+                    <constraint firstAttribute="trailing" secondItem="lS0-fi-Xc1" secondAttribute="trailing" constant="5" id="tmF-rE-AIG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="descriptionCell" destination="FuQ-MI-vet" id="7dd-n5-y4r"/>
+                <outlet property="matchPeriod" destination="8aV-e6-h3k" id="hzp-9R-djN"/>
+                <outlet property="matchTime" destination="zMf-Hw-VRq" id="iGI-uf-uHl"/>
+                <outlet property="matchTimeHeightConstraint" destination="xEF-iG-OFT" id="6su-v6-qne"/>
+                <outlet property="titleCell" destination="lS0-fi-Xc1" id="Gll-5B-cBR"/>
+                <outlet property="titleCellHeightConstraint" destination="70U-b8-Obg" id="TTA-em-DdO"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="48.575712143928037"/>
+        </tableViewCell>
+    </objects>
+</document>

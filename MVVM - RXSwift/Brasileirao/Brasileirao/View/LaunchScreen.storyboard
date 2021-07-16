@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Splash View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" id="01J-lp-oVM" customClass="SplashViewController" customModule="Brasileirao" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ADn-K1-noA">
+                                <rect key="frame" x="129" y="355.66666666666669" width="156" height="25"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgs-ks-lVi">
+                                <rect key="frame" x="239" y="383" width="46" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="5Wa-rt-Btn"/>
+                                    <constraint firstAttribute="width" constant="46" id="fH0-gh-WRJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0I1-Xs-e6a"/>
+                        <color key="backgroundColor" red="0.23137254900000001" green="0.61176470589999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ADn-K1-noA" firstAttribute="centerX" secondItem="0I1-Xs-e6a" secondAttribute="centerX" id="Ihr-lE-FHO"/>
+                            <constraint firstItem="lgs-ks-lVi" firstAttribute="trailing" secondItem="ADn-K1-noA" secondAttribute="trailing" id="Ret-tr-ORl"/>
+                            <constraint firstItem="lgs-ks-lVi" firstAttribute="top" secondItem="ADn-K1-noA" secondAttribute="bottom" constant="2.3333333333333144" id="gFl-Ws-Pq7"/>
+                            <constraint firstItem="ADn-K1-noA" firstAttribute="centerY" secondItem="0I1-Xs-e6a" secondAttribute="centerY" id="uyg-TG-wEs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="iconImageView" destination="ADn-K1-noA" id="Ut0-3W-Tp9"/>
+                        <outlet property="lblYear" destination="lgs-ks-lVi" id="tYG-4i-zVp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="232"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="156" height="25"/>
+    </resources>
+</document>
