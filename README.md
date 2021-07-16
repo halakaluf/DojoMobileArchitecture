@@ -38,18 +38,18 @@ Exemplo de uma lista de jogos na web (lado direito): [brasileirão série a](htt
 
 
 ## Descrição das soluções criadas
-O app descrito acima foi criado nas arquiteturas MVVM, VIP(clean Swift) e VIPER
+O app descrito acima foi criado nas arquiteturas MVVM, MVVM com RXSwift, VIP(clean Swift) e VIPER
 
 
 ### API
 
 Para Lista de Jogos foi utilizado a propria api do Globo Esporte:
 ```
-https://api.globoesporte.globo.com/tabela/d1a37fa4-e948-43a6-ba53-ab24ab3a45b1/fase/fase-unica-seriea-2018/rodada/2/jogos/
+https://api.globoesporte.globo.com/tabela/d1a37fa4-e948-43a6-ba53-ab24ab3a45b1/fase/fase-unica-campeonato-brasileiro-2021/rodada/2/jogos/
 ```
 Para a listagem de momentos importantes para o "Lance a Lance" foi feito um micro serviço em node que recebe a url encontrada na api de jogos na propriedade `transmissao.url` e "crawleia" os dados e retorna um Json para o app.
 ```
-https://lalmartinez.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol/brasileirao-serie-a/jogo/16-09-2018/corinthians-sport.ghtml
+https://gecrawler.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol/brasileirao-serie-a/jogo/16-09-2018/corinthians-sport.ghtml
 ```
 
 ### Bibliotecas Utilizadas
@@ -60,6 +60,9 @@ https://lalmartinez.herokuapp.com/?url=https://globoesporte.globo.com/sp/futebol
     - https://realm.io/
   - SDWebImage: Para download de imagens com um bom gerenciamento de cache
     - https://github.com/SDWebImage/SDWebImage
+  - RXSwift e RxCocoa: Para uso de programação baseada em eventos (reativa), de forma assíncrona e que pode ser composta e encadeada (funcional) através de operadores
+    - https://github.com/ReactiveX/RxSwift 
+
 
 ### Melhorias
   - Poderia ter feito um loading na tela de Listagem de partidas igual ao usado na tela de resumo
