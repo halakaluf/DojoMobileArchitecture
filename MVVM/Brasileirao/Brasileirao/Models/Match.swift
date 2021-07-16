@@ -29,6 +29,53 @@ class Match: Object, Decodable  {
         case teams          = "equipes"
         case transmission   = "transmissao"
     }
+    
+    override init() {
+        super.init()
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let stadium =  try values.decodeIfPresent(Stadium.self, forKey: .stadium) {
+            self.stadium = stadium
+        }else {
+            self.stadium = nil
+        }
+        
+        if let teams =  try values.decodeIfPresent(Teams.self, forKey: .teams) {
+            self.teams = teams
+        }else {
+            self.teams = nil
+        }
+        
+        if let transmission =  try values.decodeIfPresent(Transmission.self, forKey: .transmission) {
+            self.transmission = transmission
+        }else {
+            self.transmission = nil
+        }
+        
+        if let guestClubScore =  try values.decodeIfPresent(Int.self, forKey: .guestClubScore) {
+            self.guestClubScore = guestClubScore
+        }else {
+            self.guestClubScore = 0
+        }
+        
+        if let homeClubScore =  try values.decodeIfPresent(Int.self, forKey: .homeClubScore) {
+            self.homeClubScore = homeClubScore
+        }else {
+            self.homeClubScore = 0
+        }
+        
+        
+        
+        if let date =  try values.decodeIfPresent(Date.self, forKey: .date) {
+            self.date = date
+        }else {
+            self.date = Date()
+        }
+    }
+
 }
 
 class Stadium: Object, Decodable {

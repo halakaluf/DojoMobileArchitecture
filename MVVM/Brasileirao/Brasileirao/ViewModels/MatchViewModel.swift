@@ -65,8 +65,7 @@ struct MatchViewModel {
         let attrString = NSMutableAttributedString.init()
         attrString.append(NSMutableAttributedString(string: "\(dateFormatterPrintDate.string(from: self.date).uppercased())",
             attributes: textAttributesBold))
-        attrString.append(NSMutableAttributedString(string: " \(self.stadiumName) ",
-            attributes: textAttributesRegular))
+        attrString.append(NSMutableAttributedString(string: " \(self.stadiumName) ", attributes: textAttributesRegular))
         attrString.append(NSMutableAttributedString(string: "\(dateFormatterPrintHour.string(from: self.date))",
             attributes: textAttributesBold))
         
@@ -150,9 +149,20 @@ struct MatchViewModel {
             return URL.init(string: "http://s.glbimg.com/es/sde/f/equipes/2014/04/14/sao_paulo_60x60.png")!
         case "PAR":
             return URL.init(string: "http://s.glbimg.com/es/sde/f/equipes/2014/04/13/parana_60x60.png")!
+        case "JUV":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/juventude.png")!
+        case "CUI":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/cuiaba.png")!
+        case "FOR":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/fortaleza.png")!
+        case "ACG":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/atletico-go.png")!
+        case "BGT":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/bragantino.png")!
+        case "SPT":
+            return URL.init(string: "https://assets-es.imgfoot.com/media/cache/60x60/club/sport-recife.png")!
         default:
            return URL.init(string: "")!
         }
-        
     }
 }

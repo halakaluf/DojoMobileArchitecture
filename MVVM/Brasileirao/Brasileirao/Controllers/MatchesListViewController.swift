@@ -28,7 +28,6 @@ class MatchesListViewController: UIViewController {
         self.configureTable()
         self.bindViewModel()
         self.matchesViewModel.getMatches(isRefresh: false)
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -54,7 +53,6 @@ class MatchesListViewController: UIViewController {
         self.navigationItem.leftBarButtonItem  = buttonPrevius
         self.navigationItem.rightBarButtonItem = buttonNext
         self.setTitle(title: self.matchesViewModel.listTitle())
-
     }
 
     func bindViewModel() {
