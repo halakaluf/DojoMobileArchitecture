@@ -10,13 +10,13 @@ import UIKit
 
 protocol AlertMessageDialogPresenter {
     var alertMessage: AlertMessageView { get set }
-    func showMessage(bgColor: UIColor, msg: String)
+    func showMessage(configData: ShowAlertMessageConfig)
     func makeShowMsgView() -> (AlertMessageView)
 }
 
 extension AlertMessageDialogPresenter where Self: UIViewController {
-    func showMessage(bgColor: UIColor, msg: String) {
-        self.alertMessage.showAlertMessage(bgColor: bgColor, msg: msg)    
+    func showMessage(configData: ShowAlertMessageConfig) {
+        self.alertMessage.showAlertMessage(configData: configData)
     }
     
     func makeShowMsgView() -> (AlertMessageView) {

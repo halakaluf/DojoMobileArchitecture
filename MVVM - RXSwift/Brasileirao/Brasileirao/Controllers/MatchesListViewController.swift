@@ -8,11 +8,16 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxDataSources
 
 class MatchesListViewController: UIViewController {
     
     var matchesViewModel = MatchesListViewModel()
     var alertView = AlertMessageView()
+
+    private let disposeBag = DisposeBag()
+    
     @IBOutlet weak var tableView: UITableView!
     
     lazy var refreshControl: UIRefreshControl = {
@@ -25,19 +30,18 @@ class MatchesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureTable()
         self.bindViewModel()
-        self.matchesViewModel.getMatches(isRefresh: false)
-    }
-    
-    override func viewDidLayoutSubviews() {
+        self.configureTable()
+        self.configCellClickAction()
         self.configureView()
+        self.matchesViewModel.getMatches(isRefresh: false)
     }
     
     func configureTable() -> (Void) {
         let nib = UINib(nibName: MatchTableViewCell.cellIdentifier(), bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: MatchTableViewCell.cellIdentifier())
         self.tableView.addSubview(self.refreshControl)
+        self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
     
     func configureView() -> (Void) {
@@ -46,35 +50,79 @@ class MatchesListViewController: UIViewController {
         window.addSubview(self.alertView)
         window.bringSubviewToFront(self.alertView)
         
-        let buttonPrevius = UIBarButtonItem(image: UIImage(named: "iconPreviews"), style: .plain, target: self, action: (#selector(MatchesListViewController.barButtonPreviewsAction)))
-        let buttonNext = UIBarButtonItem(image: UIImage(named: "iconNext"), style: .plain, target: self, action: (#selector(MatchesListViewController.barButtonNextAction)))
+        let buttonPrevius = UIBarButtonItem(image: UIImage(named: "iconPreviews"), style: .plain, target: self, action: nil)
+        let buttonNext = UIBarButtonItem(image: UIImage(named: "iconNext"), style: .plain, target: self, action: nil)
+        
+        buttonPrevius.rx.tap.asObservable()
+            .bind(to: self.matchesViewModel.barButtonPreviewsAction)
+            .disposed(by: disposeBag)
+        
+        buttonNext.rx.tap.asObservable()
+            .bind(to: self.matchesViewModel.barButtonNextAction)
+            .disposed(by: disposeBag)
+        
         buttonNext.tintColor    = UIColor.white
         buttonPrevius.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem  = buttonPrevius
         self.navigationItem.rightBarButtonItem = buttonNext
-        self.setTitle(title: self.matchesViewModel.listTitle())
+        self.setTitle(title: self.matchesViewModel.listTitle()) //<----------------VER ISSO
     }
 
     func bindViewModel() {
-        self.matchesViewModel.matches.bindAndFire() { [weak self] _ in
-            self?.tableView?.reloadData()
-            self?.tableView?.layoutIfNeeded()
-            self?.tableView?.setContentOffset(.zero, animated: false)
-        }
 
-        self.matchesViewModel.showMsg = { [weak self] (bgColor, msg) in
-            self?.showMessage(bgColor: bgColor, msg: msg)
-        }
+        self.matchesViewModel
+            .matchCells
+            .do(afterNext:{_ in
+                self.tableView.layoutIfNeeded()
+                self.tableView.setContentOffset(.zero, animated: false)
+            })
+            .bind(to: self.tableView.rx.items) { tableView, index, element in
+                let indexPath = IndexPath(item: index, section: 0)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.cellIdentifier(), for: indexPath) as? MatchTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell.viewModel = element
+                return cell
+            }.disposed(by: disposeBag)
 
-        self.matchesViewModel.changeTitle = { [weak self] (title) in
-            self?.setTitle(title: title)
-        }
+        self.matchesViewModel
+            .showMsg
+            .map { [weak self] in self?.showMessage(configData: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
+       
+        self.matchesViewModel
+            .changeTitle
+            .map { [weak self] in  self?.setTitle(title: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
 
-        self.matchesViewModel.showRefreshControl.bind() { [weak self] visible in
-            if let `self` = self {
-                visible ? self.refreshControl.beginRefreshing() : self.refreshControl.endRefreshing()
-            }
-        }
+        self.matchesViewModel.showRefreshControl
+            .map { [weak self] in self?.setRefreshControlState(visible: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
+
+    }
+    
+    private func setRefreshControlState(visible: Bool) {
+        visible ? self.refreshControl.beginRefreshing() : self.refreshControl.endRefreshing()
+    }
+    
+    private func configCellClickAction() {
+        tableView
+            .rx
+            .modelSelected(MatchViewModel.self)
+            .subscribe(
+                onNext: { [weak self] match in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.performSegue(withIdentifier: "SegueShowMatchDetail", sender: match as MatchViewModel)
+                    }
+                    if let selectedRowIndexPath = self?.tableView.indexPathForSelectedRow {
+                        self?.tableView?.deselectRow(at: selectedRowIndexPath, animated: true)
+                    }
+                }
+            )
+            .disposed(by: disposeBag)
     }
 
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
@@ -89,46 +137,15 @@ class MatchesListViewController: UIViewController {
         }
     }
 
-   @objc func barButtonPreviewsAction() {
-        self.matchesViewModel.previusRound()
-    }
-
-    @objc func barButtonNextAction() {
-        self.matchesViewModel.nextRound()
-    }
-
     func setTitle(title: String) -> (Void) {
         self.title = title
     }
 }
 
-extension MatchesListViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.matchesViewModel.numberOfRows(section)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.cellIdentifier(), for: indexPath) as! MatchTableViewCell
-        
-        cell.configure(withViewModel: self.matchesViewModel.modelAt(indexPath.row))
-        return cell
-    }
-
-}
-
 extension MatchesListViewController: UITableViewDelegate {
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MatchTableViewCell.heightForRow()
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        DispatchQueue.main.async { [weak self] in
-            self?.performSegue(withIdentifier: "SegueShowMatchDetail", sender: self?.matchesViewModel.modelAt(indexPath.row))
-        }
-    }
-
 }
 
 extension MatchesListViewController: AlertMessageDialogPresenter {

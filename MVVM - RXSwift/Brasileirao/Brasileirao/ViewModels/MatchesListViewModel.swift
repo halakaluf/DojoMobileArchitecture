@@ -8,46 +8,83 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MatchesListViewModel {
-    var matches = Bindable([MatchViewModel]())
+    
+    var matchCells:  Observable<[MatchViewModel]> {
+        return cells.asObservable()
+    }
     
     let apiService = APIService.shared
     let realmService = RealmService.shared
-    let showRefreshControl: Bindable = Bindable(false)
-    var changeTitle: ((_ title: String) -> Void)?
-    var showMsg: ((_ bgColor: UIColor, _ msg: String) -> Void)?
+    let loadInProgress = BehaviorRelay(value: false)
+    let barButtonNextAction = PublishSubject<Void>()
+    let barButtonPreviewsAction = PublishSubject<Void>()
+    var changeTitle = PublishSubject<String>()
+    var showMsg = PublishSubject<ShowAlertMessageConfig>()
     var currentRound = 1
     
-    func numberOfRows(_ section: Int) -> Int {
-        return self.matches.value.count
+    private let cells = BehaviorRelay<[MatchViewModel]>(value: [])
+    private let disposeBag = DisposeBag()
+    
+    init() {
+
+        barButtonNextAction
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.nextRound()
+                }
+            )
+            .disposed(by: disposeBag)
+        
+        barButtonPreviewsAction
+            .subscribe(
+                onNext: { [weak self] in
+                    self?.previusRound()
+                }
+            )
+            .disposed(by: disposeBag)
     }
     
-    func modelAt(_ index: Int ) -> MatchViewModel {
-        return self.matches.value[index]
+    var showRefreshControl: Observable<Bool> {
+        return loadInProgress
+            .asObservable()
+            .distinctUntilChanged()
     }
     
     func getMatches(isRefresh: Bool) {
         let matches = realmService.loadMatches()
         if matches.count > 0 && isRefresh != true {
-            self.matches.value = self.convert(matches: matches)
+            self.cells.accept(self.convert(matches: matches))
             return
         }
-        self.showRefreshControl.value = true
+        self.loadInProgress.accept(true)
+       
+        self.apiService
+            .getMatches(round: self.currentRound)
+            .subscribe(
+                onNext: { [weak self] matches in
 
-        self.apiService.getMatches(round: self.currentRound, completion: { [weak self] matches in
-            guard let weakSelf = self else { return }
-            if let convertedMatches = matches as? [Match] {
-                weakSelf.realmService.saveMatches(matches: convertedMatches)
-                weakSelf.matches.value = weakSelf.convert(matches: convertedMatches)
-            } else if let error = matches as? Error{
-                weakSelf.showMsg?(UIColor.init(red: 250/255, green: 80/255, blue: 80/255, alpha: 1), error.localizedDescription)
-            } else {
-                assertionFailure("Não deveria entrar aqui, pois so deve retornar [Match] ou Error")
-            }
-            weakSelf.showRefreshControl.value = false
-        })
+                    if let convertedMatches = matches as? [Match] {
+                        self?.realmService.saveMatches(matches: convertedMatches)
+                        self?.cells.accept(self?.convert(matches: convertedMatches) ?? [])
+                    } else if let error = matches as? Error{
+                        let config = ShowAlertMessageConfig(bgColor: UIColor.init(red: 250/255, green: 80/255, blue: 80/255, alpha: 1), message: error.localizedDescription)
+                        self?.showMsg.onNext(config)
+                    } else {
+                        assertionFailure("Não deveria entrar aqui, pois so deve retornar [Match] ou Error")
+                    }
+                    self?.loadInProgress.accept(false)
+                }, onError: { [weak self] error in
+                    self?.loadInProgress.accept(false)
+                    let config = ShowAlertMessageConfig(bgColor: UIColor.init(red: 250/255, green: 80/255, blue: 80/255, alpha: 1), message: error.localizedDescription)
+                    self?.showMsg.onNext(config)
+                })
+            .disposed(by: disposeBag)
     }
+    
     
     
     private func convert(matches: [Match]) -> ([MatchViewModel]) {
@@ -63,17 +100,17 @@ class MatchesListViewModel {
         return "Rodada \(self.currentRound)"
     }
     
-    func nextRound() {
+    @objc func nextRound() {
         self.currentRound += 1
         self.getMatches(isRefresh: true)
-        self.changeTitle?(self.listTitle())
+        self.changeTitle.onNext(self.listTitle())
     }
     
     func previusRound() {
         if (self.currentRound > 1) {
             self.currentRound -= 1
             self.getMatches(isRefresh: true)
-            self.changeTitle?(self.listTitle())
+            self.changeTitle.onNext(self.listTitle())
         }
 
     }

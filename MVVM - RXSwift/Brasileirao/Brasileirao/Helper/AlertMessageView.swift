@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct ShowAlertMessageConfig {
+    let bgColor: UIColor
+    let message: String
+}
+
 class AlertMessageView: UIView {
 
     @IBOutlet weak var lblMessage: UILabel!
@@ -38,13 +43,13 @@ class AlertMessageView: UIView {
     }
     
 
-    func showAlertMessage(bgColor: UIColor, msg: String) -> (Void) {
+    func showAlertMessage(configData: ShowAlertMessageConfig) -> (Void) {
         if self.timerHideAlert != nil {
             return
         }
         self.isHidden = false
-        self.backgroundColor = bgColor
-        self.lblMessage.text = msg
+        self.backgroundColor = configData.bgColor
+        self.lblMessage.text = configData.message
         
         UIView.animate(withDuration: 0.8, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
             var frame: CGRect

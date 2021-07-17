@@ -8,10 +8,14 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 class MatchDetailViewController: UIViewController {
     var matchDetailViewModel: MatchDetailViewModel?
     var alertView = AlertMessageView()
+    
+    private let disposeBag = DisposeBag()
+    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -36,17 +40,40 @@ class MatchDetailViewController: UIViewController {
     }
 
     func bindViewModel() {
-        self.matchDetailViewModel?.bids.bindAndFire() { [weak self] _ in
-            self?.tableView?.reloadData()
-        }
+        
+        self.matchDetailViewModel?
+            .bidCells
+            .bind(to: self.tableView.rx.items) { tableView, index, element in
+                let indexPath = IndexPath(item: index, section: 0)
+                switch element {
+                    case .matchCell(let matchViewModel):
+                        let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.cellIdentifier(), for: indexPath) as! MatchTableViewCell
+                        cell.viewModel = matchViewModel
+                        return cell
+                    case .bidToBidCell:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: BidToBidTableViewCell.cellIdentifier(), for: indexPath) as! BidToBidTableViewCell
+                        return cell
+                    case .bidCell(let bidViewModel):
+                        let cell = tableView.dequeueReusableCell(withIdentifier: BidTableViewCell.cellIdentifier(), for: indexPath) as! BidTableViewCell
+                        cell.viewModel = bidViewModel
+                        return cell
+                    case .loadingCell:
+                        let cell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.cellIdentifier(), for: indexPath) as! LoadingTableViewCell
+                        return cell
+                }
+            }.disposed(by: disposeBag)
 
-        self.matchDetailViewModel?.showMsg = { [weak self] (bgColor, msg) in
-            self?.showMessage(bgColor: bgColor, msg: msg)
-        }
-
-        self.matchDetailViewModel?.hideMsg = { [weak self] in
-            self?.alertView.hideAlertMessageAnim()
-        }
+        self.matchDetailViewModel?
+            .showMsg
+            .map { [weak self] in self?.showMessage(configData: $0) }
+            .subscribe()
+            .disposed(by: disposeBag)
+        
+        self.matchDetailViewModel?
+            .hideMsg
+            .map { [weak self] in self?.alertView.hideAlertMessageAnim() }
+            .subscribe()
+            .disposed(by: disposeBag)
 
     }
     
@@ -60,39 +87,6 @@ class MatchDetailViewController: UIViewController {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
     }
 
-}
-
-
-extension MatchDetailViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRowsInSection = self.matchDetailViewModel?.numberOfRows(section) else { return 0 }
-        return numberOfRowsInSection
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch self.matchDetailViewModel?.bidModelAt(indexPath.row) {
-            case .matchCell(let matchViewModel)?:
-                let cell = tableView.dequeueReusableCell(withIdentifier: MatchTableViewCell.cellIdentifier(), for: indexPath) as! MatchTableViewCell
-                cell.configure(withViewModel: matchViewModel)
-                return cell
-            case .bidToBidCell?:
-                let cell = tableView.dequeueReusableCell(withIdentifier: BidToBidTableViewCell.cellIdentifier(), for: indexPath) as! BidToBidTableViewCell
-                return cell
-            case .bidCell(let bidViewModel)?:
-                let cell = tableView.dequeueReusableCell(withIdentifier: BidTableViewCell.cellIdentifier(), for: indexPath) as! BidTableViewCell
-                cell.configure(withViewModel: bidViewModel)
-                return cell
-            case .loadingCell?:
-                let cell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.cellIdentifier(), for: indexPath) as! LoadingTableViewCell
-                return cell
-            case .none:
-                return UITableViewCell()
-        }
-
-    }
-    
 }
 
 extension MatchDetailViewController: AlertMessageDialogPresenter {

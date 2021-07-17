@@ -25,24 +25,32 @@ class BidTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    func configure(withViewModel viewModel: BidViewModel) -> (Void) {
-        
-        if viewModel.title.isEmpty {
-            self.titleCellHeightConstraint.constant = 0
-        } else {
-            self.titleCellHeightConstraint.constant = CGFloat(titleCellHeight)
+    var viewModel: BidViewModel? {
+        didSet {
+            configure()
         }
-        self.titleCell.text = viewModel.title
-        self.descriptionCell.text = viewModel.text
+    }
+    
+    func configure() -> (Void) {
+        if let viewModel = viewModel {
+            if viewModel.title.isEmpty {
+                self.titleCellHeightConstraint.constant = 0
+            } else {
+                self.titleCellHeightConstraint.constant = CGFloat(titleCellHeight)
+            }
+            self.titleCell.text = viewModel.title
+            self.descriptionCell.text = viewModel.text
 
-        self.matchPeriod.text = viewModel.period
-        if viewModel.textTime().isEmpty {
-            self.matchTimeHeightConstraint.constant = 0
-        } else {
-            self.matchTimeHeightConstraint.constant = CGFloat(matchTimeHeight)
+            self.matchPeriod.text = viewModel.period
+            if viewModel.textTime().isEmpty {
+                self.matchTimeHeightConstraint.constant = 0
+            } else {
+                self.matchTimeHeightConstraint.constant = CGFloat(matchTimeHeight)
+            }
+            self.matchTime.text = viewModel.textTime()
+            self.layoutIfNeeded()
         }
-        self.matchTime.text = viewModel.textTime()
-        self.layoutIfNeeded()
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

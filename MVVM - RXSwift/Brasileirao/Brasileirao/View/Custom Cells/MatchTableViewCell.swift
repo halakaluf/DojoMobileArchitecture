@@ -21,16 +21,22 @@ class MatchTableViewCell: UITableViewCell {
     @IBOutlet weak var homeClubImage: UIImageView!
     @IBOutlet weak var separatorView: UIView!
     
+    var viewModel: MatchViewModel? {
+        didSet {
+            configure()
+        }
+    }
     
-    func configure(withViewModel viewModel: MatchViewModel) -> (Void) {
-        self.titleCell.attributedText = viewModel.titleText()
-        self.scoreBoard.attributedText = viewModel.scoreBoardText()
-        self.homeClubName.text = viewModel.homeClubName
-        self.guestClubName.text = viewModel.guestClubName
-        self.loadImage(url: viewModel.guestClubImageUrl, imageView: self.guestClubImage)
-        self.loadImage(url: viewModel.homeClubImageUrl, imageView: self.homeClubImage)
-        self.separatorView.isHidden = !viewModel.showSeparatorView
-       
+    func configure() -> (Void) {
+        if let viewModel = viewModel {
+            self.titleCell.attributedText = viewModel.titleText()
+            self.scoreBoard.attributedText = viewModel.scoreBoardText()
+            self.homeClubName.text = viewModel.homeClubName
+            self.guestClubName.text = viewModel.guestClubName
+            self.loadImage(url: viewModel.guestClubImageUrl, imageView: self.guestClubImage)
+            self.loadImage(url: viewModel.homeClubImageUrl, imageView: self.homeClubImage)
+            self.separatorView.isHidden = !viewModel.showSeparatorView
+        }
     }
     
     
