@@ -45,6 +45,7 @@
 		9275977821D1236C0040F020 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275977721D1236C0040F020 /* ViewControllerFactory.swift */; };
 		9275977A21D260B60040F020 /* MatchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275977921D260B60040F020 /* MatchViewModelTests.swift */; };
 		9275977C21D265F10040F020 /* MatchesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275977B21D265F10040F020 /* MatchesListViewModelTests.swift */; };
+		E98CD56B7D47E0B04D1B21DF /* Pods_Brasileirao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD257BF34A953CC021C76B11 /* Pods_Brasileirao.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		24576FEF21C82B4700BB9AC5 /* DecodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableExtension.swift; sourceTree = "<group>"; };
+		42E5153C6E74355AD0603A59 /* Pods-Brasileirao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brasileirao.debug.xcconfig"; path = "Target Support Files/Pods-Brasileirao/Pods-Brasileirao.debug.xcconfig"; sourceTree = "<group>"; };
+		720D4494EC9A2392648F4FEF /* Pods-Brasileirao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brasileirao.release.xcconfig"; path = "Target Support Files/Pods-Brasileirao/Pods-Brasileirao.release.xcconfig"; sourceTree = "<group>"; };
 		920DCC8E21C8718D006482D3 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		920DCC9021C89217006482D3 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		920DCC9221C9B911006482D3 /* AlertMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertMessageView.xib; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 		9275977721D1236C0040F020 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		9275977921D260B60040F020 /* MatchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModelTests.swift; sourceTree = "<group>"; };
 		9275977B21D265F10040F020 /* MatchesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListViewModelTests.swift; sourceTree = "<group>"; };
+		DD257BF34A953CC021C76B11 /* Pods_Brasileirao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brasileirao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E98CD56B7D47E0B04D1B21DF /* Pods_Brasileirao.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,9 +134,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4EC68556640A46DF7100FB89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD257BF34A953CC021C76B11 /* Pods_Brasileirao.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7E0A0C9B2B4AF56DB9AAE41A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				42E5153C6E74355AD0603A59 /* Pods-Brasileirao.debug.xcconfig */,
+				720D4494EC9A2392648F4FEF /* Pods-Brasileirao.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -172,6 +187,7 @@
 				920DCCBD21CC474F006482D3 /* BrasileiraoTests */,
 				9214E2EB21C6983400511319 /* Products */,
 				7E0A0C9B2B4AF56DB9AAE41A /* Pods */,
+				4EC68556640A46DF7100FB89 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,9 +337,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9214E2FC21C6983900511319 /* Build configuration list for PBXNativeTarget "Brasileirao" */;
 			buildPhases = (
+				887C06E0FC0CFA4351E32E92 /* [CP] Check Pods Manifest.lock */,
 				9214E2E621C6983400511319 /* Sources */,
 				9214E2E721C6983400511319 /* Frameworks */,
 				9214E2E821C6983400511319 /* Resources */,
+				594B2E3249EF1F306108EB66 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -400,6 +418,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		594B2E3249EF1F306108EB66 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Brasileirao/Pods-Brasileirao-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Brasileirao/Pods-Brasileirao-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Brasileirao/Pods-Brasileirao-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		887C06E0FC0CFA4351E32E92 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Brasileirao-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		920DCCB821CC474F006482D3 /* Sources */ = {
@@ -622,10 +682,11 @@
 		};
 		9214E2FD21C6983900511319 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42E5153C6E74355AD0603A59 /* Pods-Brasileirao.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 42BJ74CFXP;
+				DEVELOPMENT_TEAM = EUA7JV3LL9;
 				INFOPLIST_FILE = Brasileirao/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -640,10 +701,11 @@
 		};
 		9214E2FE21C6983900511319 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 720D4494EC9A2392648F4FEF /* Pods-Brasileirao.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 42BJ74CFXP;
+				DEVELOPMENT_TEAM = EUA7JV3LL9;
 				INFOPLIST_FILE = Brasileirao/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

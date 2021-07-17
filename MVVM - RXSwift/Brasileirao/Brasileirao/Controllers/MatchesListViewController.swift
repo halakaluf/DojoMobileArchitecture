@@ -22,7 +22,7 @@ class MatchesListViewController: UIViewController {
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:(#selector(self.handleRefresh(_:))), for: .valueChanged)
+//        refreshControl.addTarget(self, action:(#selector(self.handleRefresh(_:))), for: .valueChanged)
         refreshControl.tintColor = UIColor.init(red: 59/255, green: 156/255, blue: 0/255, alpha: 1)
         
         return refreshControl
@@ -34,7 +34,42 @@ class MatchesListViewController: UIViewController {
         self.configureTable()
         self.configCellClickAction()
         self.configureView()
-        self.matchesViewModel.getMatches(isRefresh: false)
+//        self.matchesViewModel.getMatches(isRefresh: false)
+        
+        setupInputs()
+        setupOutputs()
+    }
+    
+    func setupInputs() {
+        self.matchesViewModel.inputs.getMatchesAction.onNext(false)
+        
+        refreshControl.rx
+            .controlEvent(UIControl.Event.valueChanged)
+            .map {  _ in
+                return self.refreshControl.isRefreshing
+            }
+            .map({ _ in true })
+            .bind(to: matchesViewModel.inputs.reloadMatchesAction)
+            .disposed(by: disposeBag)
+    }
+    
+    func setupOutputs() {
+        self.matchesViewModel.outputs.listTitle
+            .asObservable()
+            .subscribe(onNext: { title in
+                self.setTitle(title: title)
+            }).disposed(by: disposeBag)
+        
+        self.matchesViewModel.outputs.isLoading
+            .drive(refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+        
+        self.matchesViewModel.outputs.alertError
+            .filter({ $0 != nil }).asObservable()
+            .subscribe(onNext: { [weak self] alertError in
+                guard let this = self else { return }
+                this.showMessage(configData: alertError!)
+            }).disposed(by: disposeBag)
     }
     
     func configureTable() -> (Void) {
@@ -54,24 +89,26 @@ class MatchesListViewController: UIViewController {
         let buttonNext = UIBarButtonItem(image: UIImage(named: "iconNext"), style: .plain, target: self, action: nil)
         
         buttonPrevius.rx.tap.asObservable()
-            .bind(to: self.matchesViewModel.barButtonPreviewsAction)
+            .bind(to: self.matchesViewModel.inputs.barButtonPreviewsAction)
             .disposed(by: disposeBag)
         
         buttonNext.rx.tap.asObservable()
-            .bind(to: self.matchesViewModel.barButtonNextAction)
+            .bind(to: self.matchesViewModel.inputs.barButtonNextAction)
             .disposed(by: disposeBag)
         
         buttonNext.tintColor    = UIColor.white
         buttonPrevius.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem  = buttonPrevius
         self.navigationItem.rightBarButtonItem = buttonNext
-        self.setTitle(title: self.matchesViewModel.listTitle()) //<----------------VER ISSO
+//        self.setTitle(title: self.matchesViewModel.listTitle()) //<----------------VER ISSO
     }
 
     func bindViewModel() {
 
         self.matchesViewModel
+            .outputs
             .matchCells
+            .asObservable()
             .do(afterNext:{_ in
                 self.tableView.layoutIfNeeded()
                 self.tableView.setContentOffset(.zero, animated: false)
@@ -85,28 +122,28 @@ class MatchesListViewController: UIViewController {
                 return cell
             }.disposed(by: disposeBag)
 
-        self.matchesViewModel
-            .showMsg
-            .map { [weak self] in self?.showMessage(configData: $0) }
-            .subscribe()
-            .disposed(by: disposeBag)
+//        self.matchesViewModel
+//            .showMsg
+//            .map { [weak self] in self?.showMessage(configData: $0) }
+//            .subscribe()
+//            .disposed(by: disposeBag)
        
-        self.matchesViewModel
-            .changeTitle
-            .map { [weak self] in  self?.setTitle(title: $0) }
-            .subscribe()
-            .disposed(by: disposeBag)
+//        self.matchesViewModel
+//            .changeTitle
+//            .map { [weak self] in  self?.setTitle(title: $0) }
+//            .subscribe()
+//            .disposed(by: disposeBag)
 
-        self.matchesViewModel.showRefreshControl
-            .map { [weak self] in self?.setRefreshControlState(visible: $0) }
-            .subscribe()
-            .disposed(by: disposeBag)
+//        self.matchesViewModel.showRefreshControl
+//            .map { [weak self] in self?.setRefreshControlState(visible: $0) }
+//            .subscribe()
+//            .disposed(by: disposeBag)
 
     }
     
-    private func setRefreshControlState(visible: Bool) {
-        visible ? self.refreshControl.beginRefreshing() : self.refreshControl.endRefreshing()
-    }
+//    private func setRefreshControlState(visible: Bool) {
+//        visible ? self.refreshControl.beginRefreshing() : self.refreshControl.endRefreshing()
+//    }
     
     private func configCellClickAction() {
         tableView
@@ -125,9 +162,9 @@ class MatchesListViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        self.matchesViewModel.getMatches(isRefresh: true)
-    }
+//    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+//        self.matchesViewModel.getMatchesAction.onNext(false)
+//    }
 
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SegueShowMatchDetail",
