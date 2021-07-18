@@ -65,7 +65,6 @@ class MatchesListViewController: UIViewController {
         buttonPrevius.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItem  = buttonPrevius
         self.navigationItem.rightBarButtonItem = buttonNext
-        self.setTitle(title: self.matchesViewModel.listTitle()) //<----------------VER ISSO
     }
 
     func bindViewModel() {
@@ -90,17 +89,17 @@ class MatchesListViewController: UIViewController {
             .map { [weak self] in self?.showMessage(configData: $0) }
             .subscribe()
             .disposed(by: disposeBag)
-       
-        self.matchesViewModel
-            .changeTitle
-            .map { [weak self] in  self?.setTitle(title: $0) }
-            .subscribe()
-            .disposed(by: disposeBag)
 
         self.matchesViewModel.showRefreshControl
             .map { [weak self] in self?.setRefreshControlState(visible: $0) }
             .subscribe()
             .disposed(by: disposeBag)
+        
+        self.matchesViewModel.listTitle
+            .asObservable()
+            .subscribe(onNext: { title in
+                self.title = title
+            }).disposed(by: disposeBag)
 
     }
     
@@ -135,10 +134,6 @@ class MatchesListViewController: UIViewController {
                 let matchViewModel = sender as! MatchViewModel
                 matchDetailViewController.matchDetailViewModel = MatchDetailViewModel(matchViewModel: matchViewModel)
         }
-    }
-
-    func setTitle(title: String) -> (Void) {
-        self.title = title
     }
 }
 

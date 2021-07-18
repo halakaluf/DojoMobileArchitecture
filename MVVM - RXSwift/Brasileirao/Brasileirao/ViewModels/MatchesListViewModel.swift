@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 import RxSwift
 import RxCocoa
 
@@ -22,27 +21,33 @@ class MatchesListViewModel {
     let loadInProgress = BehaviorRelay(value: false)
     let barButtonNextAction = PublishSubject<Void>()
     let barButtonPreviewsAction = PublishSubject<Void>()
-    var changeTitle = PublishSubject<String>()
+
     var showMsg = PublishSubject<ShowAlertMessageConfig>()
-    var currentRound = 1
-    
+
+    private var currentRound: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 1)
     private let cells = BehaviorRelay<[MatchViewModel]>(value: [])
     private let disposeBag = DisposeBag()
     
     init() {
 
         barButtonNextAction
+            .withLatestFrom(currentRound)
             .subscribe(
-                onNext: { [weak self] in
-                    self?.nextRound()
+                onNext: { [weak self] lastRound in
+                    self?.currentRound.accept(lastRound + 1)
+                    self?.getMatches(isRefresh: true)
                 }
             )
             .disposed(by: disposeBag)
         
         barButtonPreviewsAction
+            .withLatestFrom(currentRound)
             .subscribe(
-                onNext: { [weak self] in
-                    self?.previusRound()
+                onNext: { [weak self] lastRound in
+                    if (lastRound > 1) {
+                        self?.currentRound.accept(lastRound - 1)
+                        self?.getMatches(isRefresh: true)
+                    }
                 }
             )
             .disposed(by: disposeBag)
@@ -54,6 +59,13 @@ class MatchesListViewModel {
             .distinctUntilChanged()
     }
     
+    var listTitle: Driver<String> {
+        return currentRound.asObservable()
+            .map { round -> String in
+                return "Rodada \(round)"
+            }.asDriver(onErrorJustReturn: "")
+    }
+    
     func getMatches(isRefresh: Bool) {
         let matches = realmService.loadMatches()
         if matches.count > 0 && isRefresh != true {
@@ -63,7 +75,7 @@ class MatchesListViewModel {
         self.loadInProgress.accept(true)
        
         self.apiService
-            .getMatches(round: self.currentRound)
+            .getMatches(round: self.currentRound.value)
             .subscribe(
                 onNext: { [weak self] matches in
 
@@ -84,9 +96,7 @@ class MatchesListViewModel {
                 })
             .disposed(by: disposeBag)
     }
-    
-    
-    
+
     private func convert(matches: [Match]) -> ([MatchViewModel]) {
         var viewModelArray = [MatchViewModel]()
         for match in matches {
@@ -95,25 +105,7 @@ class MatchesListViewModel {
         }
         return viewModelArray
     }
-    
-    func listTitle() -> (String) {
-        return "Rodada \(self.currentRound)"
-    }
-    
-    @objc func nextRound() {
-        self.currentRound += 1
-        self.getMatches(isRefresh: true)
-        self.changeTitle.onNext(self.listTitle())
-    }
-    
-    func previusRound() {
-        if (self.currentRound > 1) {
-            self.currentRound -= 1
-            self.getMatches(isRefresh: true)
-            self.changeTitle.onNext(self.listTitle())
-        }
 
-    }
 }
 
 
